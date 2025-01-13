@@ -88,6 +88,13 @@ jobs:
               with:
                 username: ${{ vars.DOCKERHUB_USERNAME }}
                 password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            
+            - name: Docker image testing
+              uses: docker/build-push-action@v6
+              with:
+                context: .
+                push: true
+                tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
 
             
 
