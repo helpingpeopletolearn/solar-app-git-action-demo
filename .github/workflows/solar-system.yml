@@ -111,6 +111,10 @@ jobs:
               with:
                 method: kubeconfig
                 kubeconfig: ${{ secrets.KUBECONFIG }}
+
+            - name: Configure AWS access keys and secret keys
+              
+
             - name: get cluster nodes
               run: kubectl get nodes
 
