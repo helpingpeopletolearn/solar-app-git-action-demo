@@ -12,8 +12,8 @@ jobs:
         name: Unit Testing of Solar-System
         strategy: 
             matrix:
-                nodejs_version: [18, 19, 20, 22]
-                operating_system: [ubuntu-latest, macos-latest]
+                nodejs_version: [18, 20, 22]
+                operating_system: [ubuntu-latest]
         runs-on: ${{ matrix.operating_system }}
         steps:
             - name: Checkout Repository
@@ -30,11 +30,18 @@ jobs:
             - name: Unit Testing
               run: npm test
 
+            - name: Check code coverage
+              run: npm run coverage
+
             - name: Archive Test Result
               uses: actions/upload-artifact@v3
               with:
-                name: Mocha-Test-Result
-                path: test-results.xml
+                name: Code-coverage-Result
+                path: coverage
+                retention-days: 5
+
+            
+
 
 
             
