@@ -96,6 +96,24 @@ jobs:
                 push: true
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/solar-system:${{ github.sha }}
 
+    deploy-to-kubernetes:
+        needs: docker-image-creation
+        runs-on: ubuntu-24.04
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Install kubectl
+              uses: azure/setup-kubectl@v4
+              
+            - name: Configure kubectl
+              uses: azure/k8s-set-context@v3
+              with:
+                method: kubeconfig
+                kubeconfig: ${{ secrets.KUBECONFIG }}
+                
+              
+
             
 
             
